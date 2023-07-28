@@ -3,11 +3,13 @@ const router = express.Router();
 const app = express();
 const Album = require('../models/album');
 const Purchase = require('../models/purchase');
+const Cache = require('node-cache');
+const _cache = new Cache();
+
 
 // Middleware to parse JSON and URL-encoded request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 
 // GET /albums - Get a list of all albums in the database
@@ -22,15 +24,23 @@ router.get('/albums', async (req, res) => {
 
 // GET /albums/:id - Return a single album record by id
 router.get('/albums/:id', async (req, res) => {
-  try {
-    const album = await Album.findById(req.params.id);
-    if (!album) {
-      return res.status(404).json({ error: 'Album not found' });
+    const { id } = req.params;
+    const cachedData = _cache.get(id);
+    if (cachedData) {
+      return res.json(cachedData);
     }
-    res.status(200).json({ data: album });
-  } catch (err) {
-    res.status(500).json({ error: 'Internal server error' });
-  }
+    // If not in the cache, fetch the data from the database or perform expensive computations
+    //const data = await fetchDataFromDatabase(id);
+    try {
+        const album = await Album.findById(req.params.id);
+        if (!album) {
+            return res.status(404).json({ error: 'Album not found' });
+        }
+        _cache.set(id, album, 3600);
+        res.status(200).json({ data: album });
+      } catch (err) {
+        res.status(500).json({ error: 'Internal server error' });
+      }
 });
 
 
@@ -90,14 +100,12 @@ router.post('/purchases', async (req, res) => {
   }
 });
 
-// Export the router to use in the main app
 module.exports = router;
 
 
 
-
+//npm install node-cache --save
 //from Body
-
 // const express = require('express');
 // const app = express();
 // const port = 3000;
