@@ -1,0 +1,22 @@
+const mongoose = require("mongoose");
+const schema = mongoose.Schema;
+
+const albumSchema = new schema({
+  performer: String,
+  title: String,
+  cost: Number
+}, { timestamps: true });
+
+albumSchema.set("toJSON", {
+  virtuals: true,
+  versionKey: false,
+});
+
+albumSchema.set("toObject", {
+  virtuals: true,
+  versionKey: false,
+});
+
+const Album = mongoose.model("Album", albumSchema);
+
+module.exports = Album;
