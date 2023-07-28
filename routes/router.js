@@ -36,7 +36,7 @@ router.get('/albums/:id', async (req, res) => {
         if (!album) {
             return res.status(404).json({ error: 'Album not found' });
         }
-        _cache.set(id, album, 3600);
+        _cache.set(id, album,3600);
         res.status(200).json({ data: album });
       } catch (err) {
         res.status(500).json({ error: 'Internal server error' });
@@ -105,21 +105,6 @@ module.exports = router;
 
 
 //npm install node-cache --save
-//from Body
-// const express = require('express');
-// const app = express();
-// const port = 3000;
-
-// // Middleware to parse JSON and URL-encoded request bodies
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
-
-// // Route handler for POST request
-// app.post('/api/users', (req, res) => {
-//   const { username, email } = req.body;
-//   // Do something with username and email from the request body
-// });
-
 // app.listen(port, () => {
 //   console.log(`Server listening on port ${port}`);
 // });
