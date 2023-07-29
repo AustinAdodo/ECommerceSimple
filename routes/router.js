@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-// GET /albums - Get a list of all albums in the database
+// GET /albums
 router.get('/albums', async (req, res) => {
   try {
     const albums = await Album.find();
@@ -22,7 +22,7 @@ router.get('/albums', async (req, res) => {
   }
 });
 
-// GET /albums/:id - Return a single album record by id
+// GET /albums/:id
 router.get('/albums/:id', async (req, res) => {
     const { id } = req.params;
     const cachedData = _cache.get(id);
@@ -43,7 +43,6 @@ router.get('/albums/:id', async (req, res) => {
       }
 });
 
-
 router.post('/albums', async (req, res) => {
   try {
     const { title, performer, cost } = req.body;
@@ -55,7 +54,7 @@ router.post('/albums', async (req, res) => {
   }
 });
 
-// PUT /albums/:id - Update an existing album record by id
+// PUT /albums/:id
 router.put('/albums/:id', async (req, res) => {
   try {
     const { title, performer, cost } = req.body;
@@ -73,7 +72,7 @@ router.put('/albums/:id', async (req, res) => {
   }
 });
 
-// DELETE /albums/:id - Delete an existing album by id
+// DELETE /albums/:id
 router.delete('/albums/:id', async (req, res) => {
   try {
     const deletedAlbum = await Album.findByIdAndDelete(req.params.id);
@@ -86,7 +85,7 @@ router.delete('/albums/:id', async (req, res) => {
   }
 });
 
-// POST /purchases - Create a purchase
+// POST /purchases
 router.post('/purchases', async (req, res) => {
   try {
     const { user, album } = req.body;

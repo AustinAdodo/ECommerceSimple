@@ -8,7 +8,7 @@ const Album = require("../src/models/album");
 const Purchase = require("../src/models/purchase");
 
 //correct all routes with /api prefixes.
-
+//mocha //npm install chai-http
 
 chai.use(chaiHttp);
 mongoose.Promise = global.Promise;
