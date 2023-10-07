@@ -1,0 +1,44 @@
+1. The let keyword has block scope. This means that it can only be accessed from within the block of code in which it is declared.
+
+2. The this keyword can be changed using the bind() method. It can also refer to different objects depending on how the function is called.
+
+3. The result of the code snippet const x = 5; const y = "10"; console.log(x + y); is "510". 
+This is because JavaScript automatically converts numbers to strings when they are added to strings.
+
+4. All of the statements about prototype inheritance in JavaScript are true. Every object has a prototype, except for the base object. 
+Prototypes can be modified at runtime. Object properties are stored in their prototype objects. Prototypes form a tree-like structure.
+
+5. All of the methods listed are ways to prevent modifications to an object in JavaScript.
+
+6. The output of the code snippet function Animal(name) { this.name = name; } Animal.prototype.walk = function() { console.log(${this.name} 
+is walking.); }; function Dog(name) { Animal.call(this, name); } Dog.prototype = Object.create(Animal.prototype); 
+const myDog = new Dog('Rover'); myDog.walk(); is "Rover is walking."
+
+7. The output of the code snippet var a = 1; function foo() { console.log(a); var a = 2; } foo(); is 1. 
+This is because JavaScript functions have their own scope, and the var keyword declares variables 
+within the scope in which they are declared.
+
+8. All of the statements about arrow functions are true. Arrow functions have their own this context, they can be used as constructors, 
+they can have their own prototype, and they can have a variable number of arguments.
+
+9.The output of the code snippet const person = { name: 'John', age: 30, greet() { console.log(Hi, my name is ${this.name} and 
+I'm ${this.age} years old.); } }; 
+const greet = person.greet; greet(); is "Hi, my name is John and I'm 30 years old." 
+This is because the greet() function is a closure, and it has access to the variables in the scope in which it was created, 
+even after that scope has closed.
+
+10. All of the statements about closures in JavaScript are true. Closures allow a function to access variables from its parent scope, 
+they can be created without using the new keyword, they can be used with arrow functions, and they can be created outside of a class.
+
+11. The output of the code snippet const promise1 = new Promise((resolve, reject) => { setTimeout(() => { resolve('Promise 1'); }, 1000); });
+const promise2 = new Promise((resolve, reject) => { setTimeout(() => { reject('Promise 2 Error'); }, 500); });
+Promise.race([promise1, promise2]).then((result) => { console.log(result); }).catch((error) => { console.log(error); }); is "Promise 2 Error".
+This is because the Promise.race() method will resolve to the first promise that resolves or rejects. In this case, the second 
+promise will reject first, so the Promise.race() method will reject with the same error.
+
+12. The output of the code snippet const promise1 = Promise.reject('Promise 1 Error'); 
+const promise2 = Promise.resolve('Promise 2'); Promise.any([promise1, promise2])
+.then((result) => { console.log(result); }).catch((error) => { console.log(error); }); is "Promise 2". 
+This is because the Promise.any() method will resolve to the first promise that resolves, or reject with an error 
+if all of the promises reject. In this case, the second promise will resolve first, so the Promise.any() method 
+will resolve to the same value.

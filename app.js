@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 
 // Import the router file
-const router = require('./routes/router');
+const router = require('./routes/router.js');
 
 // Set up middleware to parse the request body
 app.use(bodyParser.json());
