@@ -3,10 +3,10 @@ const chai = require("chai");
 const expect = chai.expect;
 const chaiHttp = require("chai-http");
 const mongoose = require("mongoose");
-const app = require("../src/app.js");
-const User = require("../src/models/user");
-const Album = require("../src/models/album");
-const Purchase = require("../src/models/purchase");
+const app = require("../app.js");
+const User = require("../models/user.js");
+const Album = require("../models/album.js");
+const Purchase = require("../models/purchase.js");
 
 //correct all routes with /api prefixes.
 //mocha routes.test.js
@@ -19,7 +19,9 @@ chai.use(chaiHttp);
 mongoose.Promise = global.Promise;
 mongoose.set("strictQuery", false);
 
-describe("server", () => {
+describe("server", function () {
+  this.timeout(2000);
+
   const albumData = Object.freeze({
     title: "Appetite for Destruction", 
     performer: "Guns N' Roses", 
@@ -60,7 +62,7 @@ describe("server", () => {
 
   describe("GET /albums", () => {
     it("should return an array of all models", async () => {
-      const album = new Album(albumData).save();
+      const album = await new Album(albumData).save();
       const res = await chai
         .request(app)
         .get("/albums")
@@ -153,7 +155,6 @@ describe("server", () => {
     }).timeout(2000);
   });
 });
-
 
 //npm install jest chai --save-dev
 //npx jest

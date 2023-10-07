@@ -25,5 +25,6 @@ mongoose.connect(mongoURL, {
 });
 
 // Mount the router at a specific path
-app.use('/api', router);
+app.use(router);
 module.exports = app;
+//app.use('/api', router);

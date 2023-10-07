@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Album = require('./models/album');
-const Purchase = require('./models/purchase');
+const Album = require('../models/album');
+const Purchase = require('../models/purchase');
 
 // Middleware to parse JSON and URL-encoded request bodies
 router.use(express.json());
