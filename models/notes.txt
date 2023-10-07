@@ -42,3 +42,13 @@ const promise2 = Promise.resolve('Promise 2'); Promise.any([promise1, promise2])
 This is because the Promise.any() method will resolve to the first promise that resolves, or reject with an error 
 if all of the promises reject. In this case, the second promise will resolve first, so the Promise.any() method 
 will resolve to the same value.
+
+
+
+
+
+//New-SelfSignedCertificate -Subject "Mocha Certificate" -Container "Cert:\LocalMachine\My"
+//Set-AuthenticodeSignature -FilePath C:\Users\mudia\AppData\Roaming\npm\mocha.ps1 -Certificate "Mocha Certificate"
+//Set-AuthenticodeSignature -FilePath C:\Users\mudia\AppData\Roaming\npm\mocha.ps1
+//Set-AuthenticodeSignature -FilePath C:\Users\mudia\AppData\Roaming\npm\mocha.ps1 -Certificate (Get-Item Cert:\CurrentUser\My\774FDF9D5B7CAC9F2A7B691FFF445B56AF4675FA)
+//Get-ChildItem -Path Cert:\LocalMachine\My | Format-Table -Property Thumbprint, Subject -AutoSize
