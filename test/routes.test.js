@@ -1,4 +1,3 @@
-//Set-AuthenticodeSignature -FilePath C:\Users\mudia\AppData\Roaming\npm\mocha.ps1
 const chai = require("chai");
 const expect = chai.expect;
 const chaiHttp = require("chai-http");
@@ -8,7 +7,6 @@ const User = require("../models/user.js");
 const Album = require("../models/album.js");
 const Purchase = require("../models/purchase.js");
 
-//correct all routes with /api prefixes.
 //mocha routes.test.js
 //npm install chai-http
 //npm install mocha -g
