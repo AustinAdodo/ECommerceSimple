@@ -6,6 +6,7 @@ const app = require("../app.js");
 const User = require("../models/user.js");
 const Album = require("../models/album.js");
 const Purchase = require("../models/purchase.js");
+import { describe, it, expect } from '@jest/globals';
 
 //mocha routes.test.js
 //npm install chai-http
@@ -18,7 +19,7 @@ mongoose.Promise = global.Promise;
 mongoose.set("strictQuery", false);
 
 describe("server", function () {
-  this.timeout(2000);
+  jest.setTimeout(2000); //replace this.timeout with jest.setTimeout.
 
   const albumData = Object.freeze({
     title: "Appetite for Destruction", 
@@ -156,3 +157,4 @@ describe("server", function () {
 
 //npm install jest chai --save-dev
 //npx jest
+//Jest, use the jest.setTimeout() function to set a timeout for a test. In Mocha, you can use the this.timeout()
