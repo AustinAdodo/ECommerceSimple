@@ -6,7 +6,7 @@ const app = require("../app.js");
 const User = require("../models/user.js");
 const Album = require("../models/album.js");
 const Purchase = require("../models/purchase.js");
-const { describe, it } = require("@jest/globals");
+// const { describe, it } = require("@jest/globals");
 
 /**
  * Comprehensive integration testing of the API. 
@@ -140,6 +140,6 @@ describe("server", function () {
 
 //npx jest
 //Jest, use the jest.setTimeout() function to set a timeout for a test. In Mocha, use the this.timeout()
-//mocha routes.test.js
+//npx mocha ../test/routes.test.js
 //mocha --watch
 //mocha tests
