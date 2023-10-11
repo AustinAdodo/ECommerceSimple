@@ -8,18 +8,22 @@ const Album = require("../models/album.js");
 const Purchase = require("../models/purchase.js");
 const { describe, it } = require("@jest/globals");
 
-//mocha routes.test.js
-//npm install chai-http
-//npm install mocha -g
-//mocha --watch
-//mocha tests
-
+/**
+ * Comprehensive integration testing of the API. 
+ * 
+ * Install Mocha, chi-http,jest chai using
+ * : npm install mocha -g, npm install chai-http, npm install jest chai --save-dev Respectively.
+ *
+ * @param {number} num1 The first number.
+ * @param {number} num2 The second number.
+ * @returns Test Result.
+ */
 chai.use(chaiHttp);
 mongoose.Promise = global.Promise;
 mongoose.set("strictQuery", false);
 
 describe("server", function () {
-  jest.setTimeout(2000); //replace this.timeout with jest.setTimeout.
+  this.timeout(2000); //replace this.timeout with jest.setTimeout.
 
   const albumData = Object.freeze({
     title: "Appetite for Destruction",
@@ -133,6 +137,9 @@ describe("server", function () {
   });
 });
 
-//npm install jest chai --save-dev
+
 //npx jest
 //Jest, use the jest.setTimeout() function to set a timeout for a test. In Mocha, use the this.timeout()
+//mocha routes.test.js
+//mocha --watch
+//mocha tests
