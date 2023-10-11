@@ -6,7 +6,7 @@ const app = require("../app.js");
 const User = require("../models/user.js");
 const Album = require("../models/album.js");
 const Purchase = require("../models/purchase.js");
-import { describe, it, expect } from '@jest/globals';
+const { describe, it } = require("@jest/globals");
 
 //mocha routes.test.js
 //npm install chai-http
@@ -22,34 +22,25 @@ describe("server", function () {
   jest.setTimeout(2000); //replace this.timeout with jest.setTimeout.
 
   const albumData = Object.freeze({
-    title: "Appetite for Destruction", 
-    performer: "Guns N' Roses", 
-    cost: 20
+    title: "Appetite for Destruction",
+    performer: "Guns N' Roses",
+    cost: 20,
   });
-  
+
   beforeEach(() =>
-    mongoose.connect(
-      "mongodb://localhost/test", 
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }
-    )
+    mongoose.connect("mongodb://localhost/test", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
   );
-  
-  afterEach(done =>
-    mongoose.connection.db.dropDatabase(() => 
-      mongoose.connection.close(done)
-    )
+
+  afterEach((done) =>
+    mongoose.connection.db.dropDatabase(() => mongoose.connection.close(done))
   );
-  
+
   describe("POST /albums", () => {
     it("should create a new Album within the database", async () => {
-      const res = await chai
-        .request(app)
-        .post("/albums")
-        .send(albumData)
-      ;
+      const res = await chai.request(app).post("/albums").send(albumData);
       expect(res).to.be.json;
       expect(res.status).to.equal(200);
       expect(res.body.data).to.be.a("object");
@@ -62,10 +53,7 @@ describe("server", function () {
   describe("GET /albums", () => {
     it("should return an array of all models", async () => {
       const album = await new Album(albumData).save();
-      const res = await chai
-        .request(app)
-        .get("/albums")
-      ;
+      const res = await chai.request(app).get("/albums");
       expect(res.status).to.equal(200);
       expect(res).to.be.json;
       expect(res.body.data).to.be.a("array");
@@ -75,15 +63,12 @@ describe("server", function () {
       expect(res.body.data[0].cost).to.equal(albumData.cost);
     }).timeout(2000);
   });
-  
+
   describe("GET /albums/:id", () => {
     it("should return the requested model", async () => {
       await new Album(albumData).save();
       const album = await Album.findOne();
-      const res = await chai
-        .request(app)
-        .get(`/albums/${album._id}`)
-      ;
+      const res = await chai.request(app).get(`/albums/${album._id}`);
       expect(res.status).to.equal(200);
       expect(res).to.be.json;
       expect(res.body.data.cost).to.equal(album.cost);
@@ -99,8 +84,7 @@ describe("server", function () {
       const res = await chai
         .request(app)
         .put(`/albums/${album._id}`)
-        .send({performer: "Guns and Roses"})
-      ;
+        .send({ performer: "Guns and Roses" });
       expect(res.status).to.equal(200);
       expect(res.body.data.title).to.equal(album.title);
       expect(res.body.data.performer).to.equal("Guns and Roses");
@@ -111,24 +95,19 @@ describe("server", function () {
     it("should delete the record and return a 204", async () => {
       await new Album(albumData).save();
       const album = await Album.findOne();
-      const res = await chai
-        .request(app)
-        .delete(`/albums/${album._id}`)
-      ;
+      const res = await chai.request(app).delete(`/albums/${album._id}`);
       expect(res.status).to.equal(204);
     }).timeout(2000);
 
     it("should actually remove the model from the database", async () => {
       await new Album(albumData).save();
       const album = await Album.findOne();
-      const res = await chai.request(app)
-        .delete(`/albums/${album._id}`)
-      ;
+      const res = await chai.request(app).delete(`/albums/${album._id}`);
       expect(res.status).to.equal(204);
       expect(await Album.countDocuments()).to.equal(0);
     }).timeout(2000);
   });
-  
+
   describe("POST /purchases", () => {
     it("should create a new purchase and return its relations", async () => {
       const otherAlbumData = {
@@ -137,12 +116,11 @@ describe("server", function () {
         cost: 2,
       };
       const album = await new Album(otherAlbumData).save();
-      const user = await new User({name: "James"}).save();
+      const user = await new User({ name: "James" }).save();
       const res = await chai
         .request(app)
         .post("/purchases")
-        .send({user, album})
-      ;
+        .send({ user, album });
       expect(res.status).to.equal(200);
       expect(res).to.be.json;
       expect(res.body.data).to.haveOwnProperty("user");
@@ -157,4 +135,4 @@ describe("server", function () {
 
 //npm install jest chai --save-dev
 //npx jest
-//Jest, use the jest.setTimeout() function to set a timeout for a test. In Mocha, you can use the this.timeout()
+//Jest, use the jest.setTimeout() function to set a timeout for a test. In Mocha, use the this.timeout()
