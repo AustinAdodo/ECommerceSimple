@@ -17,13 +17,13 @@ mongoose.set("strictQuery", false);
  * run npx mocha ../test/routes.test.js.
  * To dynmically persist changes during Integration tests run mocha --watch.
  * run mocha tests to test musltiple test files in a folder caalled test.
- * @param {number} num1 The first number.
+ * @param {Promise} mongoose.Promise Mongoose Promise Object.
  * @returns Test Result.
  */
 
 
 describe("server", function () {
-  this.timeout(2000); //replace this.timeout with jest.setTimeout.
+  this.timeout(2000); 
 
   const albumData = Object.freeze({
     title: "Appetite for Destruction",

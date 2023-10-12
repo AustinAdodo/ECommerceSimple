@@ -6,25 +6,26 @@ const app = require("../app.js");
 const User = require("../models/user.js");
 const Album = require("../models/album.js");
 const Purchase = require("../models/purchase.js");
-// const { describe, it } = require("@jest/globals");
-
-/**
- * Comprehensive integration testing of the API. 
- * 
- * Install Mocha, chi-http,jest chai using
- * : npm install mocha -g, npm install chai-http, npm install jest chai --save-dev Respectively.
- * run npx mocha ../test/routes.test.js
- *
- * @param {number} num1 The first number.
- * @param {number} num2 The second number.
- * @returns Test Result.
- */
 chai.use(chaiHttp);
 mongoose.Promise = global.Promise;
 mongoose.set("strictQuery", false);
+const { describe, it } = require("@jest/globals");
+
+
+
+/**
+ * Comprehensive integration testing of the API Test Runner is Jest. 
+ * 
+ * Install jest chai using npm install jest chai --save-dev Respectively.
+ * npx jest
+ * Use the jest.setTimeout() function to set a timeout for a test. In Mocha, use the this.timeout()
+ * run mocha tests to test musltiple test files in a folder caalled test.
+ * @param {Promise} mongoose.Promise Mongoose Promise Object.
+ * @returns Test Result.
+ */
 
 describe("server", function () {
-  this.timeout(2000); //replace this.timeout with jest.setTimeout.
+  this.timeout(2000);
 
   const albumData = Object.freeze({
     title: "Appetite for Destruction",
@@ -43,17 +44,17 @@ describe("server", function () {
   //   mongoose.connection.db.dropDatabase(() => mongoose.connection.close(done))
   // );
 
-  // beforeEach(async () => {
-  //   await mongoose.connect("mongodb://localhost/test", {
-  //     useNewUrlParser: true,
-  //     useUnifiedTopology: true,
-  //   });
-  // });
+  beforeEach(async () => {
+    await mongoose.connect("mongodb://localhost/test", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+  });
 
-  // afterEach(async () => {
-  //   await mongoose.connection.db.dropDatabase();
-  //   await mongoose.connection.close();
-  // });
+  afterEach(async () => {
+    await mongoose.connection.db.dropDatabase();
+    await mongoose.connection.close();
+  });
 
   describe("POST /albums", () => {
     it("should create a new Album within the database", async () => {
@@ -151,8 +152,3 @@ describe("server", function () {
 });
 
 
-//npx jest
-//Jest, use the jest.setTimeout() function to set a timeout for a test. In Mocha, use the this.timeout()
-//
-//mocha --watch
-//mocha tests
