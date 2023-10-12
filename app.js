@@ -14,18 +14,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Set up the MongoDB connection
-const mongoURL = 'your_mongodb_connection_string';
-mongoose.connect(mongoURL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-})
-.then(() => {
-  console.log('Connected to MongoDB');
-})
-.catch((err) => {
-  console.error('Error connecting to MongoDB:', err);
-});
+// const mongoURL = 'your_mongodb_connection_string';
+// mongoose.connect(mongoURL, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useFindAndModify: false,
+// })
+// .then(() => {
+//  console.log('Connected to MongoDB');
+// })
+// .catch((err) => {
+//   console.error('Error connecting to MongoDB:', err);
+// });
 
 // Mount the router at a specific path
 app.use(router); //app.use('/api', router);
@@ -33,6 +33,9 @@ module.exports = app;
 
 //Exempt.
 const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 if (process.env.NODE_ENV === 'development') {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
