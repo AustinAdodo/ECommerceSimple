@@ -33,7 +33,14 @@ module.exports = app;
 
 //Exempt.
 const PORT = process.env.PORT || 3000;
+if (process.env.NODE_ENV === 'development') {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+}
+else if (process.env.NODE_ENV === 'staging') {
+  // Code to run in staging environment
+} else if (process.env.NODE_ENV === 'production') {
+  // Code to run in production environment
+} 
 //Mount on AWS : https://engineering.99x.io/deploying-net-core-application-to-aws-app-runner-with-cdk-d271744c8a6c
