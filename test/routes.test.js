@@ -16,7 +16,7 @@ mongoose.set("strictQuery", false);
  * Install Mocha, chi-http using: npm install mocha -g, npm install chai-http Respectively.
  * run npx mocha ../test/routes.test.js.
  * To dynmically persist changes during Integration tests run mocha --watch.
- * run mocha tests to test musltiple test files in a folder caalled test.
+ * run mocha tests to test multiple test files in a folder caalled test.
  * @param {Promise} mongoose.Promise Mongoose Promise Object.
  * @returns Test Result.
  */

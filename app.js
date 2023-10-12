@@ -28,3 +28,4 @@ mongoose.connect(mongoURL, {
 app.use(router);
 module.exports = app;
 //app.use('/api', router);
+//Mount on AWS : https://engineering.99x.io/deploying-net-core-application-to-aws-app-runner-with-cdk-d271744c8a6c
