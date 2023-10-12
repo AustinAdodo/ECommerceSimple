@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./swagger"); // Import the Swagger configuration
 const app = express();
 const bodyParser = require('body-parser');
 
@@ -9,6 +11,7 @@ const router = require('./routes/router.js');
 // Set up middleware to parse the request body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Set up the MongoDB connection
 const mongoURL = 'your_mongodb_connection_string';
