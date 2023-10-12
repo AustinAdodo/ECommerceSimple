@@ -9,19 +9,17 @@ router.use(express.urlencoded({ extended: true }));
 
 /**
  * @swagger
- * /api/route:
- *   get:
- *     summary: Get something
- *     responses:
- *       200:
- *         description: Success
- *         content:
- *           application/json:
- *             example:
- *               message: Success
+ * /albums:
+ * get:
+ * summary: Get Albums.
+ * responses:
+ * 200:
+ * description: Success
+ * content:
+ * application/json:
+ * example:
+ * message: Success
  */
-
-// GET /albums
 router.get("/albums", async (req, res) => {
   try {
     const albums = await Album.find();

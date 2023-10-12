@@ -28,7 +28,12 @@ mongoose.connect(mongoURL, {
 });
 
 // Mount the router at a specific path
-app.use(router);
+app.use(router); //app.use('/api', router);
 module.exports = app;
-//app.use('/api', router);
+
+//Exempt.
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 //Mount on AWS : https://engineering.99x.io/deploying-net-core-application-to-aws-app-runner-with-cdk-d271744c8a6c
