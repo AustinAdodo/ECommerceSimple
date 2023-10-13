@@ -28,7 +28,7 @@ router.get("/albums", async (req, res) => {
     const albums = await Album.find();
     res.status(200).json({ data: albums });
   } catch (err) {
-    res.status(500).json({ error: "Internal server error" + errmessage });
+    res.status(500).json({ error: "Internal server error"/* + errmessage*/ });
   }
 });
 
