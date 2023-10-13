@@ -41,17 +41,17 @@ describe("server", function () {
   //   mongoose.connection.db.dropDatabase(() => mongoose.connection.close(done))
   // );
 
-  // beforeEach(async () => {
-  //   await mongoose.connect("mongodb://localhost/test", {
-  //     useNewUrlParser: true,
-  //     useUnifiedTopology: true,
-  //   });
-  // });
+  beforeEach(async () => {
+    await mongoose.connect("mongodb://localhost/test", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+  });
 
-  // afterEach(async () => {
-  //   await mongoose.connection.db.dropDatabase();
-  //   await mongoose.connection.close();
-  // });
+  afterEach(async () => {
+    await mongoose.connection.db.dropDatabase();
+    await mongoose.connection.close();
+  });
 
   describe("POST /albums", () => {
     it("should create a new Album within the database", async () => {

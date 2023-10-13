@@ -1,9 +1,15 @@
 const swaggerJSDoc = require("swagger-jsdoc");
 
 /**
+ * Swagger Configurations.
+ * 
  * npm install swagger-jsdoc swagger-ui-express --save
+ * npm install -g swagger-jsdoc
  * npm install -g swagger-cli
  * swagger-cli validate swagger.json
+ * http://localhost:3000/api-docs
+ * NB: Ensure Swagger.json file is generated before using swagger.
+ * Geneate using : npx swagger-jsdoc -d swagger.js -o swagger.json
  */
 
 const options = {

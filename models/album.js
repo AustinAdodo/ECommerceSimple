@@ -5,7 +5,7 @@ const albumSchema = new schema({
   performer: String,
   title: String,
   cost: Number
-}, { timestamps: true });
+}, { timestamps: true, /*collection: 'custom_collection_name' */});
 
 albumSchema.set("toJSON", {
   virtuals: true,

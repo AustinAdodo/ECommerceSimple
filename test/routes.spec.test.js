@@ -15,7 +15,7 @@ const { describe, it } = require("@jest/globals");
  * Comprehensive integration testing of the API Test Runner is Jest. 
  * 
  * Install jest chai using npm install jest chai --save-dev Respectively.
- * npx jest
+ * run npx jest
  * Use the jest.setTimeout() function to set a timeout for a test. In Mocha, use the this.timeout()
  * run mocha tests to test musltiple test files in a folder caalled test.
  * @param {Promise} mongoose.Promise Mongoose Promise Object.
