@@ -2,12 +2,11 @@ const express = require("express");
 const router = express.Router();
 const Album = require("../models/album");
 const Purchase = require("../models/purchase");
-``;
 
 // Middleware to parse JSON and URL-encoded request bodies
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
-const errmessage = ", could not retrieve albums";
+//Implement Caching and Pagination.
 
 /**
  * @swagger
@@ -22,18 +21,29 @@ const errmessage = ", could not retrieve albums";
  *             example:
  *               message: Success
  */
-
 router.get("/albums", async (req, res) => {
   try {
     const albums = await Album.find();
     res.status(200).json({ data: albums });
   } catch (err) {
-    res.status(500).json({ error: "Internal server error"/* + errmessage*/ });
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
-// GET /albums/:id
-router.get("/albums/:id", async (req, res) => {
+/**
+ * @swagger
+ * /albums/{id}:
+ *   get:
+ *     summary: Get an album
+ *     responses:
+ *       200:
+ *         description: Success
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Success
+ */
+router.get("/albums/{id}", async (req, res) => {
   try {
     const album = await Album.findById(req.params.id);
     if (!album) {
@@ -45,7 +55,19 @@ router.get("/albums/:id", async (req, res) => {
   }
 });
 
-// POST /albums
+/**
+ * @swagger
+ * /albums:
+ *   post:
+ *     summary: Post an Album
+ *     responses:
+ *       200:
+ *         description: Success
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Success
+ */
 router.post("/albums", async (req, res) => {
   try {
     const { title, performer, cost } = req.body;
@@ -57,8 +79,20 @@ router.post("/albums", async (req, res) => {
   }
 });
 
-// PUT /albums/:id
-router.put("/albums/:id", async (req, res) => {
+/**
+ * @swagger
+ * /albums/{id}:
+ *   put:
+ *     summary: Edit an Album
+ *     responses:
+ *       200:
+ *         description: Success
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Success
+ */
+router.put("/albums/{id}", async (req, res) => {
   try {
     const { title, performer, cost } = req.body;
     const updatedAlbum = await Album.findByIdAndUpdate(
@@ -75,8 +109,16 @@ router.put("/albums/:id", async (req, res) => {
   }
 });
 
-// DELETE /albums/:id
-router.delete("/albums/:id", async (req, res) => {
+/**
+ * @swagger
+ * /albums:
+ *   delete:
+ *     summary: Delete an Album
+ *     responses:
+ *       204:
+ *         description: No Content
+ */
+router.delete("/albums/{id}", async (req, res) => {
   try {
     const deletedAlbum = await Album.findByIdAndDelete(req.params.id);
     if (!deletedAlbum) {
@@ -88,7 +130,19 @@ router.delete("/albums/:id", async (req, res) => {
   }
 });
 
-// POST /purchases
+/**
+ * @swagger
+ * /purchases:
+ *   post:
+ *     summary: Post a purchase
+ *     responses:
+ *       200:
+ *         description: Success
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Success
+ */
 router.post("/purchases", async (req, res) => {
   try {
     const { user, album } = req.body;

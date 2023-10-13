@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const swaggerUi = require("swagger-ui-express");
-const swaggerSpec = require("./swagger"); // Import the Swagger configuration
 const app = express();
 const bodyParser = require('body-parser');
-//Implement Caching and Pagination.
-
-// Import the router file
 const router = require('./routes/router.js');
+
+// Import the Swagger configuration
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./swagger"); 
 
 // Set up middleware to parse the request body
 app.use(bodyParser.json());
