@@ -2,10 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Album = require("../models/album");
 const Purchase = require("../models/purchase");
+``;
 
 // Middleware to parse JSON and URL-encoded request bodies
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
+const errmessage = ", could not retrieve albums";
 
 /**
  * @swagger
@@ -26,7 +28,7 @@ router.get("/albums", async (req, res) => {
     const albums = await Album.find();
     res.status(200).json({ data: albums });
   } catch (err) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error" + errmessage });
   }
 });
 
