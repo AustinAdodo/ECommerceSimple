@@ -13,19 +13,25 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// Set up the MongoDB connection
-// const mongoURL = 'your_mongodb_connection_string';
+// Set up the MongoDB connection //useFindAndModify: false <-- Deprecated.,
+const mongoURL = 'mongodb://localhost:27017/';
 // mongoose.connect(mongoURL, {
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true,
 //   useFindAndModify: false,
 // })
-// .then(() => {
-//  console.log('Connected to MongoDB');
-// })
-// .catch((err) => {
-//   console.error('Error connecting to MongoDB:', err);
-// });
+mongoose.connect(mongoURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true, // Add this line
+  useFindAndModify: false,
+})
+.then(() => {
+ console.log('Connected to MongoDB');
+})
+.catch((err) => {
+  console.error('Error connecting to MongoDB:', err);
+});
 
 // Mount the router at a specific path
 app.use(router); //app.use('/api', router);
