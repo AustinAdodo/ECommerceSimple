@@ -43,7 +43,7 @@ router.get("/albums", async (req, res) => {
  *             example:
  *               message: Success
  */
-router.get("/albums/{id}", async (req, res) => {
+router.get("/albums/:id", async (req, res) => {
   try {
     const album = await Album.findById(req.params.id);
     if (!album) {
@@ -92,7 +92,7 @@ router.post("/albums", async (req, res) => {
  *             example:
  *               message: Success
  */
-router.put("/albums/{id}", async (req, res) => {
+router.put("/albums/:id", async (req, res) => {
   try {
     const { title, performer, cost } = req.body;
     const updatedAlbum = await Album.findByIdAndUpdate(
@@ -118,7 +118,7 @@ router.put("/albums/{id}", async (req, res) => {
  *       204:
  *         description: No Content
  */
-router.delete("/albums/{id}", async (req, res) => {
+router.delete("/albums/:id", async (req, res) => {
   try {
     const deletedAlbum = await Album.findByIdAndDelete(req.params.id);
     if (!deletedAlbum) {

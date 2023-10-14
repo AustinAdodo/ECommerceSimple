@@ -46,6 +46,8 @@ app.use(router); //app.use('/api', router);
 module.exports = app;
 
 //Exempt.
+// netstat -ano | findstr :3000
+// taskkill /F /PID <PID> e.g taskkill /F /PID 9112
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
@@ -56,8 +58,6 @@ else if (process.env.NODE_ENV === 'staging') {
 } else if (process.env.NODE_ENV === 'production') {
 } 
 //Mount on AWS : https://engineering.99x.io/deploying-net-core-application-to-aws-app-runner-with-cdk-d271744c8a6c
-// netstat -ano | findstr :3000
-// taskkill /F /PID <PID> e.g taskkill /F /PID 9112
 // mongoose.connect(mongoURL, {
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true,
