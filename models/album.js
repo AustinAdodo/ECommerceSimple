@@ -17,6 +17,7 @@ albumSchema.set("toObject", {
   versionKey: false,
 });
 
-const Album = mongoose.model("Album", albumSchema);
+//const Album = mongoose.model("Album", albumSchema);
+const Album = mongoose.model("Album", albumSchema,"Albums");
 
 module.exports = Album;
