@@ -151,7 +151,6 @@ router.post("/purchases", async (req, res) => {
 
     // Use populate to include user and album data in the response
     await savedPurchase.populate("user album").execPopulate();
-
     res.status(200).json({ data: savedPurchase });
   } catch (err) {
     res.status(500).json({ error: "Internal server error" });

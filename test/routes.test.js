@@ -42,7 +42,7 @@ describe("server", function () {
   // );
 
   beforeEach(async () => {
-    await mongoose.connect('mongodb://127.0.0.1:27017/test', {
+    await mongoose.connect('mongodb://127.0.0.1:27017/Test', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
