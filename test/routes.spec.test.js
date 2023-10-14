@@ -23,7 +23,7 @@ const { describe, it } = require("@jest/globals");
  */
 
 describe("server", function () {
-  this.timeout(2000);
+ jest.setTimeout(2000);
 
   const albumData = Object.freeze({
     title: "Appetite for Destruction",
@@ -43,7 +43,7 @@ describe("server", function () {
   // );
 
   beforeEach(async () => {
-    await mongoose.connect("mongodb://localhost/test", {
+    await mongoose.connect("mongodb://127.0.0.1:27017/Test", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -150,3 +150,9 @@ describe("server", function () {
 });
 
 
+//exempt:
+  // testMatch: [
+  //   "**/__tests__/**/*.[jt]s?(x)",
+  //   "**/?(*.)+(spec|test).[tj]s?(x)",
+  //   "**/*.spec.test.js"
+  // ],

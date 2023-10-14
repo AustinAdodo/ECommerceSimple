@@ -143,7 +143,7 @@ describe("server", function () {
       expect(res.body.data.user).to.haveOwnProperty("name");
       expect(res.body.data).to.haveOwnProperty("album");
       expect(res.body.data.album).to.haveOwnProperty("title");
-      expect(res.body.data.user.name).to.equal(userData.name);
+      expect(res.body.data.user.name).to.equal((user.name));
       expect(res.body.data.album.title).to.equal(album.title);
     }).timeout(2000);
   });
@@ -168,7 +168,7 @@ describe("server", function () {
 //       expect(res.body.data.user).to.haveOwnProperty("name");
 //       expect(res.body.data).to.haveOwnProperty("album");
 //       expect(res.body.data.album).to.haveOwnProperty("title");
-//       expect(res.body.data.user.name).to.equal(user.name);
+//       expect(res.body.data.user.name).to.equal(userData.name);
 //       expect(res.body.data.album.title).to.equal(album.title);
 //     }).timeout(2000);
 //   });
