@@ -3,7 +3,6 @@ const path = require("path");
 const filePaths = [
   path.resolve(__dirname, "routes/router.js")
 ];
-console.log(filePaths[0]);
 
 /**
  * Swagger Configurations.
