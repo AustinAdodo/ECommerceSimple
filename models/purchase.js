@@ -1,13 +1,11 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
-const Album = require("../models/album");
-const User = require("../models/user");
+const Album = require("./album");
+const User = require("./user");
 
 const purchaseSchema = new schema({
-  user: User,
-  album: Album
-  // user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },   // 'User' references the model name
-  // album: { type: mongoose.Schema.Types.ObjectId, ref: "Album" }  // 'Album' references the model name
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  album: { type: mongoose.Schema.Types.ObjectId, ref: "Album" },
 }, { timestamps: true });
 
 purchaseSchema.set("toJSON", {

@@ -131,19 +131,44 @@ describe("server", function () {
         cost: 2,
       };
       const album = await new Album(otherAlbumData).save();
-      const user = await new User({ name: "James" }).save();
+      const userData = { name: "James" }; // Define user data with a 'name' property
+      const user = await new User(userData).save();
       const res = await chai
         .request(app)
         .post("/purchases")
-        .send({ user, album });
+        .send({ user: user._id, album: album._id });
       expect(res.status).to.equal(200);
       expect(res).to.be.json;
       expect(res.body.data).to.haveOwnProperty("user");
       expect(res.body.data.user).to.haveOwnProperty("name");
       expect(res.body.data).to.haveOwnProperty("album");
       expect(res.body.data.album).to.haveOwnProperty("title");
-      expect(res.body.data.user.name).to.equal(user.name);
+      expect(res.body.data.user.name).to.equal(userData.name);
       expect(res.body.data.album.title).to.equal(album.title);
     }).timeout(2000);
   });
+  
 });
+// describe("POST /purchases", () => {
+//     it("should create a new purchase and return its relations", async () => {
+//       const otherAlbumData = {
+//         title: "Sample",
+//         performer: "Unknown",
+//         cost: 2,
+//       };
+//       const album = await new Album(otherAlbumData).save();
+//       const user = await new User({ name: "James" }).save();
+//       const res = await chai
+//         .request(app)
+//         .post("/purchases")
+//         .send({ user, album });
+//       expect(res.status).to.equal(200);
+//       expect(res).to.be.json;
+//       expect(res.body.data).to.haveOwnProperty("user");
+//       expect(res.body.data.user).to.haveOwnProperty("name");
+//       expect(res.body.data).to.haveOwnProperty("album");
+//       expect(res.body.data.album).to.haveOwnProperty("title");
+//       expect(res.body.data.user.name).to.equal(user.name);
+//       expect(res.body.data.album.title).to.equal(album.title);
+//     }).timeout(2000);
+//   });
