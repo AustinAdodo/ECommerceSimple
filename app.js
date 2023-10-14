@@ -6,7 +6,7 @@ const router = require('./routes/router.js');
 
 // Import the Swagger configuration
 const swaggerUi = require("swagger-ui-express");
-const swaggerSpec = require("./swagger"); 
+const swaggerSpec = require("./swagger.js");
 
 // Set up middleware to parse the request body
 app.use(bodyParser.json());

@@ -1,12 +1,10 @@
 const swaggerJSDoc = require("swagger-jsdoc");
 const path = require("path");
-process.chdir(__dirname); // __dirname is the directory of the current script
-const filePath = "routes/*.js";
-//const filePath = "routes/router.js";
-const absolutePath = path.resolve(filePath);
+const filePaths = [
+  path.resolve(__dirname, "routes/router.js")
+];
+console.log(filePaths[0]);
 
-console.log("inside swagger.js");
-console.log(absolutePath);
 /**
  * Swagger Configurations.
  *
@@ -21,15 +19,14 @@ console.log(absolutePath);
 
 const options = {
   swaggerDefinition: {
-    openapi: "3.0.0", // Use the appropriate version
+    openapi: "3.0.0",
     info: {
       title: "Album API Documentation.",
       version: "1.0.0",
       description: "Album API",
     },
   },
-  apis: [absolutePath], // path to route files with annotations @openapi or @swagger.
+  apis: filePaths // path to route files with annotations @openapi or @swagger.
 };
-
 const swaggerSpec = swaggerJSDoc(options);
 module.exports = swaggerSpec;

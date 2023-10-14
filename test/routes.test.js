@@ -14,7 +14,7 @@ mongoose.set("strictQuery", false);
  * Comprehensive integration testing of the API. 
  * 
  * Install Mocha, chi-http using: npm install mocha -g, npm install chai-http Respectively.
- * run npx mocha ../test/routes.test.js.
+ * run npx mocha ../test/routes.test.js
  * To dynmically persist changes during Integration tests run mocha --watch.
  * run mocha tests to test multiple test files in a folder caalled test.
  * @param {Promise} mongoose.Promise Mongoose Promise Object.
@@ -42,7 +42,7 @@ describe("server", function () {
   // );
 
   beforeEach(async () => {
-    await mongoose.connect("mongodb://localhost/test", {
+    await mongoose.connect('mongodb://127.0.0.1:27017/test', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
