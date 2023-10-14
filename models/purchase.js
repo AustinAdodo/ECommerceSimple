@@ -21,6 +21,6 @@ purchaseSchema.set("toObject", {
   versionKey: false,
 });
 
-const Purchase = mongoose.model("Purchase", purchaseSchema);
+const Purchase = mongoose.model("Purchase", purchaseSchema,"Purchases");
 
 module.exports = Purchase;

@@ -147,16 +147,25 @@ router.delete("/albums/:id", async (req, res) => {
 router.post("/purchases", async (req, res) => {
   try {
     const { user, album } = req.body;
-    const newPurchase = new Purchase({ user, album });
+    
+    // Fetch the User and Album instances using the provided IDs
+    const userInstance = await User.findById(user);
+    const albumInstance = await Album.findById(album);
+
+    if (!userInstance || !albumInstance) {
+      return res.status(404).json({ error: "User or Album not found" });
+    }
+
+    // Create a new Purchase with the instances
+    const newPurchase = new Purchase({ user: userInstance, album: albumInstance });
     const savedPurchase = await newPurchase.save();
 
-    // Use populate to include user and album data in the response
-    //await savedPurchase.populate("user album").execPopulate();
     res.status(200).json({ data: savedPurchase });
   } catch (err) {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
 
 module.exports = router;
 
@@ -175,3 +184,17 @@ module.exports = router;
 
 // Swagger JSDoc: It allows you to write JSDoc comments in your API code, and it generates a Swagger definition that can be served
 // using Swagger UI Express.
+
+// router.post("/purchases", async (req, res) => {
+//   try {
+//     const { user, album } = req.body;
+//     const newPurchase = new Purchase({ user, album });
+//     const savedPurchase = await newPurchase.save();
+
+//     // Use populate to include user and album data in the response
+//     //await savedPurchase.populate("user album").execPopulate();
+//     res.status(200).json({ data: savedPurchase });
+//   } catch (err) {
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// });
