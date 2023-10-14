@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Album = require("../models/album");
 const Purchase = require("../models/purchase");
+const User = require("../models/user");
 
 // Middleware to parse JSON and URL-encoded request bodies
 router.use(express.json());
@@ -150,7 +151,7 @@ router.post("/purchases", async (req, res) => {
     const savedPurchase = await newPurchase.save();
 
     // Use populate to include user and album data in the response
-    await savedPurchase.populate("user album").execPopulate();
+    //await savedPurchase.populate("user album").execPopulate();
     res.status(200).json({ data: savedPurchase });
   } catch (err) {
     res.status(500).json({ error: "Internal server error" });
