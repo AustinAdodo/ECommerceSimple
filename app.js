@@ -13,18 +13,32 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// Set up the MongoDB connection NB://useFindAndModify: false & useCreateIndex: true <-- Deprecated.,
-const mongoURL = 'mongodb://127.0.0.1:27017/Music';
-//const mongoURL = 'mongodb://127.0.0.1:27017/Test';
-mongoose.connect(mongoURL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => {
- console.log('Connected to MongoDB');
-})
-.catch((err) => {
-  console.error('Error connecting to MongoDB:', err);
+// MongoDB connection NB://useFindAndModify: false & useCreateIndex: true <-- Deprecated.,
+const mongoURLMusic = 'mongodb://127.0.0.1:27017/Music';
+const mongoURLTest = 'mongodb://127.0.0.1:27017/Test';
+app.use((req, res, next) => {
+  if (req.headers['user-agent'] && req.headers['user-agent'].includes('Postman')) {
+    mongoose.connect(mongoURLMusic, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }).then(() => {
+      console.log('Connected to MongoDB');
+     })
+     .catch((err) => {
+       console.error('Error connecting to MongoDB:', err);
+     });
+  } else {
+    mongoose.connect(mongoURLTest, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }).then(() => {
+      console.log('Connected to MongoDB');
+     })
+     .catch((err) => {
+       console.error('Error connecting to MongoDB:', err);
+     });
+  }
+  next();
 });
 
 // Mount the router at a specific path

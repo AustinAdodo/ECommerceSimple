@@ -49,7 +49,7 @@ describe("server", function () {
   });
 
   afterEach(async () => {
-    await mongoose.connection.db.dropDatabase();
+    //await mongoose.connection.db.dropDatabase();
     await mongoose.connection.close();
   });
 
