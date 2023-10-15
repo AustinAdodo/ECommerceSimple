@@ -22,7 +22,7 @@ app.use((req, res, next) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }).then(() => {
-      console.log('Connected to MongoDB');
+      console.log('Connected to MongoDB for Postman');
      })
      .catch((err) => {
        console.error('Error connecting to MongoDB:', err);
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }).then(() => {
-      console.log('Connected to MongoDB');
+      console.log('Connected to MongoDB for Tests');
      })
      .catch((err) => {
        console.error('Error connecting to MongoDB:', err);
