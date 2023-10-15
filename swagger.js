@@ -15,7 +15,7 @@ const filePaths = [
  * NB: Ensure Swagger.json file is generated before using swagger.
  * Geneate Swagger.json file using : npx swagger-jsdoc -d ./swagger.js -o swagger.json
  */
-
+console.log(filePaths[0]);
 const options = {
   swaggerDefinition: {
     openapi: "3.0.0",
@@ -23,6 +23,7 @@ const options = {
       title: "Album API Documentation.",
       version: "1.0.0",
       description: "Album API",
+      debug: true
     },
   },
   apis: filePaths // path to route files with annotations @openapi or @swagger.
