@@ -12,7 +12,8 @@ mongoose.set("strictQuery", false);
 const { describe, it } = require("@jest/globals");
 
 /**
- * Comprehensive integration testing of the API Test Runner is Jest. 
+ * Ref: https://jestjs.io/docs/configuration
+ * Integration testing API Test Runner with Jest. 
  * 
  * Install jest chai using npm install jest chai --save-dev Respectively.
  * remove watch-auto-run in settings.json with "jest.autoRun": { "watch": false }
@@ -64,7 +65,7 @@ describe("server", function () {
       expect(res.body.data.title).to.equal(albumData.title);
       expect(res.body.data.performer).to.equal(albumData.performer);
       expect(res.body.data.cost).to.equal(albumData.cost);
-    }).timeout(2000);
+    });
   });
 
   describe("GET /albums", () => {
@@ -78,7 +79,7 @@ describe("server", function () {
       expect(res.body.data[0].title).to.equal(albumData.title);
       expect(res.body.data[0].performer).to.equal(albumData.performer);
       expect(res.body.data[0].cost).to.equal(albumData.cost);
-    }).timeout(2000);
+    });
   });
 
   describe("GET /albums/:id", () => {
@@ -91,7 +92,7 @@ describe("server", function () {
       expect(res.body.data.cost).to.equal(album.cost);
       expect(res.body.data.title).to.equal(album.title);
       expect(res.body.data.performer).to.deep.equal(album.performer);
-    }).timeout(2000);
+    });
   });
 
   describe("PUT /albums/:id", () => {
@@ -105,7 +106,7 @@ describe("server", function () {
       expect(res.status).to.equal(200);
       expect(res.body.data.title).to.equal(album.title);
       expect(res.body.data.performer).to.equal("Guns and Roses");
-    }).timeout(2000);
+    });
   });
 
   describe("DELETE /albums/:id", () => {
@@ -114,7 +115,7 @@ describe("server", function () {
       const album = await Album.findOne();
       const res = await chai.request(app).delete(`/albums/${album._id}`);
       expect(res.status).to.equal(204);
-    }).timeout(2000);
+    });
 
     it("should actually remove the model from the database", async () => {
       await new Album(albumData).save();
@@ -122,7 +123,7 @@ describe("server", function () {
       const res = await chai.request(app).delete(`/albums/${album._id}`);
       expect(res.status).to.equal(204);
       expect(await Album.countDocuments()).to.equal(0);
-    }).timeout(2000);
+    });
   });
 
   describe("POST /purchases", () => {
@@ -146,7 +147,7 @@ describe("server", function () {
       expect(res.body.data.album).to.haveOwnProperty("title");
       expect(res.body.data.user.name).to.equal(user.name);
       expect(res.body.data.album.title).to.equal(album.title);
-    }).timeout(2000);
+    });
   });
 });
 
