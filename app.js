@@ -40,8 +40,6 @@ app.use((req, res, next) => {
   }
   next();
 });
-
-// Mount the router at a specific path
 app.use(router); //app.use('/api', router);
 module.exports = app;
 
