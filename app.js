@@ -40,6 +40,7 @@ app.use((req, res, next) => {
   }
   next();
 });
+
 app.use(router); //app.use('/api', router);
 module.exports = app;
 
@@ -55,6 +56,7 @@ if (process.env.NODE_ENV === 'development') {
 else if (process.env.NODE_ENV === 'staging') {
 } else if (process.env.NODE_ENV === 'production') {
 } 
+//Use Express to build the API gateway.
 //Mount on AWS : https://engineering.99x.io/deploying-net-core-application-to-aws-app-runner-with-cdk-d271744c8a6c
 // mongoose.connect(mongoURL, {
 //   useNewUrlParser: true,
