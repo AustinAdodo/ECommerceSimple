@@ -11,21 +11,21 @@ router.use(express.urlencoded({ extended: true }));
 //Implement Caching and Pagination.
 
 //middleware for Authentcation
-app.use(session({
-  secret: 'devops',
-  resave: false,
-  saveUninitialized: true,
-}));
+// app.use(session({
+//   secret: 'devops',
+//   resave: false,
+//   saveUninitialized: true,
+// }));
 
-const checkAuth = (req, res, next) => {
-  if (req.session && req.session.user && req.session.expires > Date.now()) {
-    // User is authenticated and has an unexpired session
-    next();
-  } else {
-    // Redirect to the login page or handle unauthorized access
-    res.redirect('/login');
-  }
-};
+// const checkAuth = (req, res, next) => {
+//   if (req.session && req.session.user && req.session.expires > Date.now()) {
+//     // User is authenticated and has an unexpired session
+//     next();
+//   } else {
+//     // Redirect to the login page or handle unauthorized access
+//     res.redirect('/login');
+//   }
+// };
 
 /**
  * @swagger
@@ -179,10 +179,10 @@ router.post("/purchases", async (req, res) => {
 });
 
 // applying checkAuth middleware on routes that require authentication.
-app.get('/dashboard', checkAuth, (req, res) => {
-  // If user is authenticated, render the dashboard
-  res.render('dashboard');
-});
+// app.get('/dashboard', checkAuth, (req, res) => {
+//   // If user is authenticated, render the dashboard
+//   res.render('dashboard');
+// });
 
 module.exports = router;
 

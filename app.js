@@ -5,13 +5,13 @@ const bodyParser = require('body-parser');
 const router = require('./routes/router.js');
 
 // Import the Swagger configuration
-const swaggerUi = require("swagger-ui-express");
-const swaggerSpec = require("./swagger.js");
+// const swaggerUi = require("swagger-ui-express");
+// const swaggerSpec = require("./swagger.js");
 
 // Set up middleware to parse the request body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // MongoDB connection NB://useFindAndModify: false & useCreateIndex: true <-- Deprecated.,
 const mongoURLMusic = 'mongodb://127.0.0.1:27017/Music';
